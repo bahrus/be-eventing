@@ -18,9 +18,17 @@ class BeEventing extends BE {
             ...propInfo,
         },
         positractions: [resolved, rejected],
+        actions: {
+            getOn: {
+                ifNoneOf: ['resolved']
+            }
+        }
     }
 
     de = de;
+
+    /** @type {AbortController | undefined} */
+    #ac;
 
     /**
      * 
@@ -31,14 +39,23 @@ class BeEventing extends BE {
         const {enhancedElement} = self;
         const {on, previousElementSibling} = enhancedElement;
         if(previousElementSibling === null) throw 404;
-        //TODO: abort controller
+        this.#ac = new AbortController();
         for(const eventName in on){
             const handler = on[eventName];
-            previousElementSibling.addEventListener(eventName, handler);
+            previousElementSibling.addEventListener(eventName, handler, {signal: this.#ac.signal});
         }
         return /** @type {PAP} */ ({
             resolved: true,
         });
+    }
+
+    /**
+     * 
+     * @param {HTMLScriptElement} el 
+     */
+    async detach(el){
+        this.#ac?.abort();
+        await super.detach(el);
     }
 }
 
