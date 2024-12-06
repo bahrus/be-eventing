@@ -24,8 +24,8 @@
     "README.md"
   ],
   "scripts": {
+    "serve": "python3 ./node_modules/ssi-server/ssi_server.py",
     "test": "playwright test",
-    "serve": "node node_modules/may-it-serve/serve.js",
     "safari": "npx playwright wk http://localhost:3030",
     "update": "ncu -u && npm install"
   },

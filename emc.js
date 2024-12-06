@@ -1,14 +1,19 @@
 // @ts-check
 import { BeHive, seed, MountObserver } from 'be-hive/be-hive.js';
 /** @import {EMC} from './ts-refs/trans-render/be/types' */
+/** @import {Actions, PAP, AllProps, AP, BAP} from './ts-refs/be-eventing/types' */;
 
 /**
- * @type {EMC}
+ * @type {EMC<any, BAP>}
  */
 export const emc = {
     base: 'be-eventing',
+    branches: ['', 'nudges'],
     map: {
-
+        '1.0': {
+            instanceOf: 'String',
+            mapsTo: 'nudges'
+        }
     },
     enhPropKey: 'beEventing',
     importEnh: async () => {

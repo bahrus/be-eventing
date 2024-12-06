@@ -11,7 +11,8 @@ or
 ```html
 <button>My Button</button>
 <script 🏇>document.currentScript.on={
-    click: e => console.log({e})}</script>
+    click: e => console.log({e})
+}</script>
 
 ```
 

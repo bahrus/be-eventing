@@ -16,6 +16,7 @@ class BeEventing extends BE {
     static config = {
         propInfo: {
             ...propInfo,
+            nudges: {}
         },
         positractions: [resolved, rejected],
         actions: {
