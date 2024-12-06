@@ -35,14 +35,19 @@ class BeEventing extends BE {
      * @param {BAP} self 
      * @returns 
      */
-    getOn(self){
-        const {enhancedElement} = self;
+    async getOn(self){
+        const {enhancedElement, nudges} = self;
         const {on, previousElementSibling} = enhancedElement;
         if(previousElementSibling === null) throw 404;
         this.#ac = new AbortController();
         for(const eventName in on){
             const handler = on[eventName];
             previousElementSibling.addEventListener(eventName, handler, {signal: this.#ac.signal});
+        }
+        if(nudges !== undefined){
+            const {nudge} = await import('trans-render/lib/nudge.js');
+            const splitNudges = nudges.split(' ');
+            nudge(previousElementSibling, splitNudges);
         }
         return /** @type {PAP} */ ({
             resolved: true,
