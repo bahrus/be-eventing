@@ -1,6 +1,6 @@
 {
   "name": "be-eventing",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "keywords": [
     "web-components",
     "web-component",
@@ -12,7 +12,7 @@
   "description": "",
   "main": "be-eventing.js",
   "module": "be-eventing.js",
-  "exports":{
+  "exports": {
     ".": "./be-eventing.js",
     "./be-eventing.js": "./be-eventing.js",
     "./emc.js": "./emc.js",
