@@ -1,11 +1,52 @@
 {
   "name": "be-eventing",
   "version": "0.0.0",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements",
+    "enhancement",
+    "behavior"
+  ],
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "be-eventing.js",
+  "module": "be-eventing.js",
+  "exports":{
+    ".": "./be-eventing.js",
+    "./be-eventing.js": "./be-eventing.js",
+    "./emc.js": "./emc.js",
+    "./🏇.js": "./🏇.js"
   },
-  "author": "",
-  "license": "MIT"
+  "files": [
+    "*.js",
+    "types.d.ts",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "playwright test",
+    "serve": "node node_modules/may-it-serve/serve.js",
+    "safari": "npx playwright wk http://localhost:3030",
+    "update": "ncu -u && npm install"
+  },
+  "dependencies": {
+    "be-enhanced": "0.0.156",
+    "be-hive": "0.0.236",
+    "mount-observer": "0.0.39",
+    "trans-render": "0.0.864"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.49.0",
+    "ssi-server": "0.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahrus/be-eventing.git"
+  },
+  "author": "Bruce Anderson <anderson.bruce.b@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bahrus/be-eventing/issues"
+  },
+  "homepage": "https://github.com/bahrus/be-eventing#readme"
 }
