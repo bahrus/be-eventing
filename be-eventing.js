@@ -42,15 +42,29 @@ class BeEventing extends BE {
         const {enhancedElement, nudges} = self;
         const {on, previousElementSibling} = enhancedElement;
         if(previousElementSibling === null) throw 404;
+        let previousNonScriptElementSibling = previousElementSibling;
+        while(previousNonScriptElementSibling.localName === 'script'){
+            const test = previousNonScriptElementSibling.previousElementSibling;
+            if(test === null) throw 404;
+            previousNonScriptElementSibling = test;
+        }
         this.#ac = new AbortController();
         for(const eventName in on){
             const handler = on[eventName];
-            previousElementSibling.addEventListener(eventName, handler, {signal: this.#ac.signal});
+            previousNonScriptElementSibling.addEventListener(eventName, handler, {signal: this.#ac.signal});
         }
         if(nudges !== undefined){
+            if((nudges === 'disabled' && !('disabled' in previousNonScriptElementSibling))){
+                return /** @type {PAP} */ ({
+                    resolved: true,
+                });
+            }
             const {nudge} = await import('trans-render/lib/nudge.js');
-            const splitNudges = nudges.split(' ');
-            nudge(previousElementSibling, splitNudges);
+            if(nudges === 'disabled'){
+                nudge(previousNonScriptElementSibling);
+            }else{
+                nudge(previousNonScriptElementSibling, 'defer-' + nudges);
+            }
         }
         return /** @type {PAP} */ ({
             resolved: true,
