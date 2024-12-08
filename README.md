@@ -1,9 +1,18 @@
 # be-eventing (🏇)
 
+Minimal CSP security rules stipulate that inline event handlers are "out of bounds" as far as guaranteeing safety.
+
+This enhancement is designed to live within those (excessively?) tight constraints, and still be able to attach event handlers "locally" without requiring the framework or custom element host that has to micromanage everything leading to tight coupling.
+
+Whereas attaching an event handler using a unique id may work outside the shadow DOM, it doesn't work very well with repeating content, especially inside Shadow Roots.  This is my view, is driving a stake through progressive enhancement.
+
+This enhancement endeavors to blunt the edge of that stake.
+
 ```html
-<button>My Button</button>
+<button disabled>My Button</button>
 <script be-eventing>document.currentScript.on={
-    click: e => console.log({e})}</script>
+    click: e => console.log({e})
+}</script>
 ```
 
 or
@@ -33,7 +42,7 @@ Either one attaches the click event handler to the previous element sibling (but
         <div>A witch!</div>
         <div>Burn her!</div>
     </template>
-    <script be-eventing=be-switched>document.currentScript.on={
+    <script 🏇=be-switched>document.currentScript.on={
         change: e => e.r = Math.abs(e.f.carrotNosedWoman - e.f.aDuck) < 10
     }</script>
 </ways-of-science>
@@ -45,7 +54,7 @@ What this does, precisely [TODO]:
 2.  Gets the enhKey
 3.  Filters out events that don't match the enhKey
 4.  Attaches the enhanced event listener to the previous non script element sibling.
-5.  "Nudges" the def-be-switched
+5.  "Nudges" the defer-be-switched (eliminating it if there's no numeric value or it has value="1", otherwise decrements the number)
 
 
 ## Viewing Locally
