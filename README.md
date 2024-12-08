@@ -2,9 +2,9 @@
 
 Minimal CSP security rules stipulate that inline event handlers are "out of bounds" as far as guaranteeing safety.
 
-This enhancement is designed to live within those (excessively?) tight constraints, and still be able to attach event handlers "locally" without requiring the framework or custom element host that has to micromanage everything leading to tight coupling.
+This enhancement is designed to live within those (excessively?) tight constraints, and still be able to attach event handlers "locally" without requiring a framework or custom element host that has to micromanage everything -- leading to tight coupling.
 
-Whereas attaching an event handler using a unique id may work outside the shadow DOM, it doesn't work very well with repeating content, especially inside Shadow Roots.  This is my view, is driving a stake through progressive enhancement.
+Whereas attaching an event handler using a unique id may work outside the shadow DOM, it doesn't work very well with repeating content, especially inside Shadow Roots.  This, in my view, is driving a stake through progressive enhancement.
 
 This enhancement endeavors to blunt the edge of that stake.
 
@@ -18,7 +18,7 @@ This enhancement endeavors to blunt the edge of that stake.
 or
 
 ```html
-<button>My Button</button>
+<button disabled>My Button</button>
 <script 🏇>document.currentScript.on={
     click: e => console.log({e})
 }</script>
@@ -27,9 +27,11 @@ or
 
 Either one attaches the click event handler to the previous element sibling (button in this case) by default.
 
-## nudging
+If "disabled" is a property of the element being eventing, it nudges the attribute -- basically removing it.
 
-*be-eventing* can also "nudge" the previous element (by default), removing "disabled" and "defer-[enhancementBase]"
+## un-deferring
+
+*be-eventing* can also "nudge" "defer-[enhancementBase]" attributes:
 
 ```html
 <ways-of-science itemscope>

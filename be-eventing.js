@@ -14,9 +14,11 @@ class BeEventing extends BE {
      * @type {BEConfig<AP & BEAllProps, Actions & IEnhancement, any>}
      */
     static config = {
+        propDefaults:{
+            nudges: 'disabled'
+        },
         propInfo: {
             ...propInfo,
-            nudges: {}
         },
         positractions: [resolved, rejected],
         actions: {

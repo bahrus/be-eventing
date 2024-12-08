@@ -8,9 +8,8 @@ import { BeHive, seed, MountObserver } from 'be-hive/be-hive.js';
  */
 export const emc = {
     base: 'be-eventing',
-    branches: ['', 'nudges'],
     map: {
-        '1.0': {
+        '0.0': {
             instanceOf: 'String',
             mapsTo: 'nudges'
         }
