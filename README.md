@@ -22,6 +22,32 @@ Either one attaches the click event handler to the previous element sibling (but
 
 *be-eventing* can also "nudge" the previous element (by default), removing "disabled" and "defer-[enhancementBase]"
 
+```html
+<ways-of-science itemscope>
+    <carrot-nosed-woman></carrot-nosed-woman>
+    <a-duck></a-duck>
+    <template
+        defer-be-switched
+        be-switched='On based on ~carrotNosedWoman::weight-change and ~aDuck::molting.'
+    >
+        <div>A witch!</div>
+        <div>Burn her!</div>
+    </template>
+    <script be-eventing=be-switched>document.currentScript.on={
+        change: e => e.r = Math.abs(e.f.carrotNosedWoman - e.f.aDuck) < 10
+    }</script>
+</ways-of-science>
+```
+
+What this does, precisely [TODO]:
+
+1.  Finds Mount Observer Script Element (MOSE) with id:  "be-hive.be-switched" within the shadow realm
+2.  Gets the enhKey
+3.  Filters out events that don't match the enhKey
+4.  Attaches the enhanced event listener to the previous non script element sibling.
+5.  "Nudges" the def-be-switched
+
+
 ## Viewing Locally
 
 Any web server that serves static files will do but...
