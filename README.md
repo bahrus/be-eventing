@@ -50,13 +50,10 @@ If "disabled" is a property of the element being eventing, it nudges the attribu
 </ways-of-science>
 ```
 
-What this does, precisely [TODO]:
+What this does, precisely:
 
-1.  Finds Mount Observer Script Element (MOSE) with id:  "be-hive.be-switched" within the shadow realm
-2.  Gets the enhKey
-3.  Filters out events that don't match the enhKey
-4.  Attaches the enhanced event listener to the previous non script element sibling.
-5.  "Nudges" the defer-be-switched (eliminating it if there's no numeric value or it has value="1", otherwise decrements the number)
+1.  Attaches the enhanced event listener to the previous non script element sibling.
+2.  "Nudges" the defer-be-switched (eliminating it if there's no numeric value or it has value="1", otherwise decrements the number)
 
 
 ## Viewing Locally
@@ -75,7 +72,7 @@ Any web server that serves static files will do but...
 ## Importing in ES Modules:
 
 ```JavaScript
-import 'be-elevating/be-elevating.js';
+import 'be-eventing/be-eventing.js';
 
 ```
 
@@ -83,7 +80,7 @@ import 'be-elevating/be-elevating.js';
 
 ```html
 <script type=module crossorigin=anonymous>
-    import 'https://esm.run/be-elevating';
+    import 'https://esm.run/be-eventing';
 </script>
 ```
 
