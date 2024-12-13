@@ -8,6 +8,7 @@ import { BeHive, seed, MountObserver } from 'be-hive/be-hive.js';
  */
 export const emc = {
     base: 'be-eventing',
+    branches: ['', 'on'],
     map: {
         '0.0': {
             instanceOf: 'String',

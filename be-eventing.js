@@ -39,7 +39,7 @@ class BeEventing extends BE {
      * @returns 
      */
     async getOn(self){
-        const {enhancedElement, nudges} = self;
+        const {enhancedElement, nudges, on: o} = self;
         const {on, previousElementSibling, e} = enhancedElement;
         if(previousElementSibling === null) throw 404;
         let previousNonScriptElementSibling = previousElementSibling;
