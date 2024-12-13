@@ -40,7 +40,7 @@ class BeEventing extends BE {
      */
     async getOn(self){
         const {enhancedElement, nudges} = self;
-        const {on, previousElementSibling} = enhancedElement;
+        const {on, previousElementSibling, e} = enhancedElement;
         if(previousElementSibling === null) throw 404;
         let previousNonScriptElementSibling = previousElementSibling;
         while(previousNonScriptElementSibling.localName === 'script'){
@@ -49,10 +49,16 @@ class BeEventing extends BE {
             previousNonScriptElementSibling = test;
         }
         this.#ac = new AbortController();
-        for(const eventName in on){
-            const handler = on[eventName];
-            previousNonScriptElementSibling.addEventListener(eventName, handler, {signal: this.#ac.signal});
+        if(on !== undefined){
+            for(const eventName in on){
+                const handler = on[eventName];
+                previousNonScriptElementSibling.addEventListener(eventName, handler, {signal: this.#ac.signal});
+            }
         }
+        if(e !== undefined && nudges !== undefined){
+            previousElementSibling.addEventListener(nudges, e, {signal: this.#ac.signal});
+        }
+
         if(nudges !== undefined){
             if((nudges === 'disabled' && !('disabled' in previousNonScriptElementSibling))){
                 return /** @type {PAP} */ ({
