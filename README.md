@@ -89,7 +89,7 @@ This is equivalent to:
 </div>
 ```
 
-## withing you were here
+## Withing you were here
 
 Like the native event handlers, the context of the element that dispatched can be accessed easily:
 
