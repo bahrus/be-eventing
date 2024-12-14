@@ -32,7 +32,7 @@ So this also works:
 
 ```html
 <button disabled>My Button</button>
-<script 🏇>console.log({e})</script>
+<script  nomodule🏇>console.log({e})</script>
 ```
 
 ## un-deferring
