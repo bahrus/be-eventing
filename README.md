@@ -1,4 +1,4 @@
-# be-eventing (🏇) [TODO]
+# be-eventing (🏇)
 
 Minimal CSP security rules stipulate that inline event handlers are "out of bounds" as far as guaranteeing safety.
 
@@ -8,7 +8,7 @@ Whereas attaching an event handler using a unique id may work outside the shadow
 
 This enhancement endeavors to blunt the edge of that stake.
 
-## 1995 scripting, but harder [TODO]
+## 1995 scripting, but harder 
 
 ```html
 <button disabled>My Button</button>
@@ -35,7 +35,7 @@ So this also works:
 <script 🏇>console.log({e})</script>
 ```
 
-## un-deferring [TODO]
+## un-deferring
 
 *be-eventing* can also "nudge" "defer-[enhancementBase]" attributes:
 
