@@ -61,7 +61,7 @@ What this does, precisely:
 1.  Attaches the enhanced event listener to the previous non script element sibling.
 2.  "Nudges" the defer-be-switched (eliminating it if there's no numeric value or it has value="1", otherwise decrements the number)
 
-##  Occasional (?) short cut when the stars align [TODO]
+##  Occasional (?) short cut when the stars align
 
 A pattern seems to be emerging that some enhancements find it natural to raise an event with the same name as the enhancement itself:
 
@@ -89,6 +89,14 @@ This is equivalent to:
 </div>
 ```
 
+## withing you were here
+
+Like the native event handlers, the context of the element that dispatched can be accessed easily:
+
+```html
+<button>My Button</button>
+<script nomodule>textContent = 'hello';</script>
+```
 
 
 ## Viewing Locally

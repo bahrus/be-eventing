@@ -45,7 +45,7 @@ class BeEventing extends BE {
      */
     async calcDefaults(self){
         const {on, onNudges, nudges, enhancedElement} = self;
-        if(onNudges !== undefined){
+        if(onNudges){
             return  /** @type {PAP} */ ({
                 on: onNudges,
                 nudges: onNudges
@@ -76,9 +76,9 @@ class BeEventing extends BE {
         this.#ac = new AbortController();
         const innerScript = enhancedElement.innerHTML;
         const guid = `a_${crypto.randomUUID()}`;
-        const revisedScript = `document.currentScript['${guid}'] = e => {
+        const revisedScript = `document.currentScript['${guid}'] = e => {with(event.target){
 ${innerScript}
-}`;
+}}`;
         const scriptEl = document.createElement('script');
         scriptEl.innerHTML = revisedScript;
         document.head.appendChild(scriptEl);
