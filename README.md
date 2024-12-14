@@ -26,6 +26,15 @@ Either one attaches the click event handler to the previous element sibling (but
 
 If "disabled" is a property of the element being eventing, it nudges the attribute -- basically removing it.
 
+By the way, the "click" event is assumed by default, unless the target element is an input element, in which case the "input" event is assumed, or a slot element, in which case the "slotchange" event is assumed.
+
+So this also works:
+
+```html
+<button disabled>My Button</button>
+<script 🏇>console.log({e})</script>
+```
+
 ## un-deferring [TODO]
 
 *be-eventing* can also "nudge" "defer-[enhancementBase]" attributes:
