@@ -10,8 +10,8 @@ This enhancement endeavors to blunt the edge of that stake.
 
 ```html
 <button disabled>My Button</button>
-<script nomodule be-eventing>{
-    click: e => console.log({e})
+<script nomodule be-eventing-on=click>{
+    console.log({e})
 }</script>
 ```
 
@@ -19,17 +19,14 @@ or
 
 ```html
 <button disabled>My Button</button>
-<script 🏇>{
-    click: e => console.log({e})
-}</script>
-
+<script 🏇-on=click>console.log({e})</script>
 ```
 
 Either one attaches the click event handler to the previous element sibling (button in this case) by default.
 
 If "disabled" is a property of the element being eventing, it nudges the attribute -- basically removing it.
 
-## un-deferring
+## un-deferring [TODO]
 
 *be-eventing* can also "nudge" "defer-[enhancementBase]" attributes:
 
@@ -44,9 +41,9 @@ If "disabled" is a property of the element being eventing, it nudges the attribu
         <div>A witch!</div>
         <div>Burn her!</div>
     </template>
-    <script 🏇=be-switched>document.currentScript.on={
-        change: e => e.r = Math.abs(e.f.carrotNosedWoman - e.f.aDuck) < 10
-    }</script>
+    <script 🏇-nudge=be-switched 🏇-on=change>document.currentScript.on=
+        e.r = Math.abs(e.f.carrotNosedWoman - e.f.aDuck) < 10;
+    </script>
 </ways-of-science>
 ```
 
@@ -55,6 +52,33 @@ What this does, precisely:
 1.  Attaches the enhanced event listener to the previous non script element sibling.
 2.  "Nudges" the defer-be-switched (eliminating it if there's no numeric value or it has value="1", otherwise decrements the number)
 
+##  Occasional (?) short cut when the stars align [TODO]
+
+A pattern seems to be emerging that some enhancements find it natural to raise an event with the same name as the enhancement itself:
+
+```html
+<div>
+    <input id=searchString type=search>
+
+    <div defer-🔭 🔭='#searchString and punt.'></div>
+    <script 🏇=🔭>
+        e.target.textContent = e.args[0] + ' World';
+    <script>
+</div>
+```
+
+This is equivalent to:
+
+```html
+<div>
+    <input id=searchString type=search>
+
+    <div defer-🔭 🔭='#searchString and punt.'></div>
+    <script 🏇-on=🔭 🏇-nudge=🔭>
+        e.target.textContent = e.args[0] + ' World';
+    <script>
+</div>
+```
 
 ## Viewing Locally
 
