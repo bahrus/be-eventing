@@ -75,14 +75,7 @@ class BeEventing extends BE {
         }
         this.#ac = new AbortController();
         const innerScript = enhancedElement.innerHTML;
-        const guid = `a_${crypto.randomUUID()}`;
-        const revisedScript = `document.currentScript['${guid}'] = e => {with(event.target){
-${innerScript}
-}}`;
-        const scriptEl = document.createElement('script');
-        scriptEl.innerHTML = revisedScript;
-        document.head.appendChild(scriptEl);
-        const eventHandler = /** @type ((e: Event) => void) */ (scriptEl[guid]);
+        const eventHandler = (await import('trans-render/lib/activate.js')).activate(innerScript);
         previousNonScriptElementSibling.addEventListener(on, eventHandler, {signal: this.#ac.signal});
         if((nudges === 'disabled' && !('disabled' in previousNonScriptElementSibling))){
             return /** @type {PAP} */ ({
