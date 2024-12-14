@@ -63,7 +63,7 @@ A pattern seems to be emerging that some enhancements find it natural to raise a
     <div defer-🔭 🔭='#searchString and punt.'></div>
     <script 🏇=🔭>
         e.target.textContent = e.args[0] + ' World';
-    <script>
+    </script>
 </div>
 ```
 
@@ -76,7 +76,7 @@ This is equivalent to:
     <div defer-🔭 🔭='#searchString and punt.'></div>
     <script 🏇-on=🔭 🏇-nudge=🔭>
         e.target.textContent = e.args[0] + ' World';
-    <script>
+    </script>
 </div>
 ```
 
