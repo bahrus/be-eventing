@@ -10,7 +10,7 @@ This enhancement endeavors to blunt the edge of that stake.
 
 ```html
 <button disabled>My Button</button>
-<script be-eventing>document.currentScript.on={
+<script nomodule be-eventing>{
     click: e => console.log({e})
 }</script>
 ```
@@ -19,7 +19,7 @@ or
 
 ```html
 <button disabled>My Button</button>
-<script 🏇>document.currentScript.on={
+<script 🏇>{
     click: e => console.log({e})
 }</script>
 
