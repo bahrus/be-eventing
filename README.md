@@ -41,7 +41,7 @@ If "disabled" is a property of the element being eventing, it nudges the attribu
         <div>A witch!</div>
         <div>Burn her!</div>
     </template>
-    <script 🏇-nudge=be-switched 🏇-on=change>document.currentScript.on=
+    <script 🏇-nudge=be-switched 🏇-on=change>
         e.r = Math.abs(e.f.carrotNosedWoman - e.f.aDuck) < 10;
     </script>
 </ways-of-science>
@@ -79,6 +79,8 @@ This is equivalent to:
     <script>
 </div>
 ```
+
+
 
 ## Viewing Locally
 
