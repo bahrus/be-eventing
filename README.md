@@ -19,7 +19,7 @@ or
 
 ```html
 <button disabled>My Button</button>
-<script 🏇-on=click>console.log({e})</script>
+<script nomodule 🏇-on=click>console.log({e})</script>
 ```
 
 Either one attaches the click event handler to the previous element sibling (button in this case) by default.
