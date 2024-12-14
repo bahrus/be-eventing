@@ -49,7 +49,7 @@ class BeEventing extends BE {
             })
         }
         return /** @type {PAP} */ ({
-            on: (await import('trans-render/asmr/stdEvt.js')).stdEvt(enhancedElement),
+            on: on ?? (await import('trans-render/asmr/stdEvt.js')).stdEvt(enhancedElement),
             nudges: nudges ?? 'disabled'
         });
         
