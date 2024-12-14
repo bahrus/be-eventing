@@ -14,15 +14,17 @@ class BeEventing extends BE {
      * @type {BEConfig<AP & BEAllProps, Actions & IEnhancement, any>}
      */
     static config = {
-        propDefaults:{
-            nudges: 'disabled'
-        },
+        propDefaults:{},
         propInfo: {
             ...propInfo,
         },
         positractions: [resolved, rejected],
         actions: {
-            getOn: {
+            calcDefaults: {
+                ifNotAllOf: ['on', 'nudges']
+            },
+            hydrate: {
+                ifAllOf: ['on', 'nudges'],
                 ifNoneOf: ['resolved']
             }
         }
@@ -38,8 +40,29 @@ class BeEventing extends BE {
      * @param {BAP} self 
      * @returns 
      */
-    async getOn(self){
-        const {enhancedElement, nudges} = self;
+    async calcDefaults(self){
+        const {on, onNudges, nudges, enhancedElement} = self;
+        if(onNudges !== undefined){
+            return  /** @type {PAP} */ ({
+                on: onNudges,
+                nudges: onNudges
+            })
+        }
+        return /** @type {PAP} */ ({
+            on: (await import('trans-render/asmr/stdEvt.js')).stdEvt(enhancedElement),
+            nudges: nudges ?? 'disabled'
+        });
+        
+    }
+
+    /**
+     * 
+     * @param {BAP} self 
+     * @returns 
+     */
+    async hydrate(self){
+        const {enhancedElement, nudges, onNudges} = self;
+        let nudge = 
         const {on, previousElementSibling, e} = enhancedElement;
         if(previousElementSibling === null) throw 404;
         let previousNonScriptElementSibling = previousElementSibling;
