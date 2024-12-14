@@ -17,6 +17,9 @@ class BeEventing extends BE {
         propDefaults:{},
         propInfo: {
             ...propInfo,
+            on: {},
+            nudges: {},
+            onNudges: {},
         },
         positractions: [resolved, rejected],
         actions: {
@@ -61,9 +64,8 @@ class BeEventing extends BE {
      * @returns 
      */
     async hydrate(self){
-        const {enhancedElement, nudges, onNudges} = self;
-        let nudge = 
-        const {on, previousElementSibling, e} = enhancedElement;
+        const {enhancedElement, nudges, on} = self;
+        const {previousElementSibling} = enhancedElement;
         if(previousElementSibling === null) throw 404;
         let previousNonScriptElementSibling = previousElementSibling;
         while(previousNonScriptElementSibling.localName === 'script'){
@@ -72,29 +74,28 @@ class BeEventing extends BE {
             previousNonScriptElementSibling = test;
         }
         this.#ac = new AbortController();
-        if(on !== undefined){
-            for(const eventName in on){
-                const handler = on[eventName];
-                previousNonScriptElementSibling.addEventListener(eventName, handler, {signal: this.#ac.signal});
-            }
+        const innerScript = enhancedElement.innerHTML;
+        const guid = `a_${crypto.randomUUID()}`;
+        const revisedScript = `document.currentScript['${guid}'] = e => {
+${innerScript}
+}`;
+        const scriptEl = document.createElement('script');
+        scriptEl.innerHTML = revisedScript;
+        document.head.appendChild(scriptEl);
+        const eventHandler = /** @type ((e: Event) => void) */ (scriptEl[guid]);
+        previousNonScriptElementSibling.addEventListener(on, eventHandler, {signal: this.#ac.signal});
+        if((nudges === 'disabled' && !('disabled' in previousNonScriptElementSibling))){
+            return /** @type {PAP} */ ({
+                resolved: true,
+            });
         }
-        if(e !== undefined && nudges !== undefined){
-            previousElementSibling.addEventListener(nudges, e, {signal: this.#ac.signal});
+        const {nudge} = await import('trans-render/lib/nudge.js');
+        if(nudges === 'disabled'){
+            nudge(previousNonScriptElementSibling);
+        }else{
+            nudge(previousNonScriptElementSibling, 'defer-' + nudges);
         }
 
-        if(nudges !== undefined){
-            if((nudges === 'disabled' && !('disabled' in previousNonScriptElementSibling))){
-                return /** @type {PAP} */ ({
-                    resolved: true,
-                });
-            }
-            const {nudge} = await import('trans-render/lib/nudge.js');
-            if(nudges === 'disabled'){
-                nudge(previousNonScriptElementSibling);
-            }else{
-                nudge(previousNonScriptElementSibling, 'defer-' + nudges);
-            }
-        }
         return /** @type {PAP} */ ({
             resolved: true,
         });
