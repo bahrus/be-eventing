@@ -95,7 +95,7 @@ Like the native event handlers, the context of the element that dispatched can b
 
 ```html
 <button>My Button</button>
-<script nomodule>textContent = 'hello';</script>
+<script 🏇 nomodule>textContent = 'hello';</script>
 ```
 
 
