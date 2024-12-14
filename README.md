@@ -1,4 +1,4 @@
-# be-eventing (🏇)
+# be-eventing (🏇) [TODO]
 
 Minimal CSP security rules stipulate that inline event handlers are "out of bounds" as far as guaranteeing safety.
 
@@ -8,11 +8,11 @@ Whereas attaching an event handler using a unique id may work outside the shadow
 
 This enhancement endeavors to blunt the edge of that stake.
 
+## 1995 scripting, but harder [TODO]
+
 ```html
 <button disabled>My Button</button>
-<script nomodule be-eventing-on=click>{
-    console.log({e})
-}</script>
+<script nomodule be-eventing-on=click>console.log({e})</script>
 ```
 
 or
@@ -24,7 +24,7 @@ or
 
 Either one attaches the click event handler to the previous element sibling (button in this case) by default.
 
-If "disabled" is a property of the element being eventing, it nudges the attribute -- basically removing it.
+If "disabled" is a property of the target element, *be-eventing* nudges the attribute -- basically removing it.
 
 By the way, the "click" event is assumed by default, unless the target element is an input element, in which case the "input" event is assumed, or a slot element, in which case the "slotchange" event is assumed.
 
@@ -72,7 +72,7 @@ A pattern seems to be emerging that some enhancements find it natural to raise a
     <div defer-🔭 🔭='#searchString and punt.'></div>
     <script 🏇=🔭>
         e.target.textContent = e.args[0] + ' World';
-    <script>
+    </script>
 </div>
 ```
 
@@ -85,7 +85,7 @@ This is equivalent to:
     <div defer-🔭 🔭='#searchString and punt.'></div>
     <script 🏇-on=🔭 🏇-nudge=🔭>
         e.target.textContent = e.args[0] + ' World';
-    <script>
+    </script>
 </div>
 ```
 
